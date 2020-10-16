@@ -16,8 +16,7 @@ app.use(express.json());
 
 // Express Session
 
-
-
+// Andrew: Changed the order of the code here, routes needs to go after passport.initialization and session.
 app.use(session({
   secret: 'keyboard cat',
   saveUninitialized: true,

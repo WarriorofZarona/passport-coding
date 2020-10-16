@@ -13,6 +13,7 @@ const passport = require("../../config/passport")
 router.route("/signup")
     .post(userController.createUser)
 
+//Andrew: Adjusted this route to include the passport.authenticate method
 router
     .post("/login", passport.authenticate('local'), userController.loginUser)
 

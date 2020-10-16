@@ -21,6 +21,7 @@ module.exports = {
     });
   },
 
+  // Andrew: when a log in is successful, this creates the req.user
   loginUser: function (req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
