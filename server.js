@@ -1,5 +1,5 @@
 const express = require("express");
-const dotenv = require('dotenv'); 
+const dotenv = require('dotenv');
 dotenv.config()
 const mongoose = require("mongoose");
 // var bodyParser = require('body-parser');
@@ -17,23 +17,22 @@ app.use(express.json());
 // Express Session
 
 
+
+app.use(session({
+  secret: 'keyboard cat',
+  saveUninitialized: true,
+  resave: true
+}));
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session())
+// Add routes, both API and view
+app.use(routes);
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-// Add routes, both API and view
-app.use(routes);
-
-app.use(session({
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: true
-}));
-
-// Passport init
-app.use(passport.initialize());
-app.use(passport.session())
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reacttasklist", { //|| "mongodb://localhost/reacttasklist" //Removed local for Michael's dev purposes.
@@ -43,8 +42,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reacttasklist",
   useUnifiedTopology: true
 });
 
+
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
